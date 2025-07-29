@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Campus Connect</title>
+    <style>
+        /* All your existing CSS from welcome.html goes here... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .welcome-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6a6dd3, #3a3d9e);
+            color: white;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 60px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+            line-height: 1;
+        }
+        
+        h1 {
+            font-size: 42px;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-in-out 1s forwards;
+        }
+        
+        .cta-button {
+            background-color: white;
+            color: #5052b5;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-in-out 2s forwards;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Include all other CSS rules from your original file */
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .demo-notice {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Campus Connect</h1>
+        
+        <button class="cta-button" onclick="window.location.href='index.html'">Get Started</button>
+        
+        <div class="demo-notice">
+            Note: This is a static web application for demonstration purposes. Backend functionality is simulated.
+        </div>
+    </div>
+    </body>
+</html>
