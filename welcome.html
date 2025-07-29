@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Campus Connect</title>
+    <title>Campus Connect - Digital Notice Board</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
     <style>
-        /* All your existing CSS from welcome.html goes here... */
+        /* --- General Styles --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: "Poppins", sans-serif;
         }
-        
-        body {
-            background-color: #f5f5f5;
-            overflow: hidden;
-            height: 100vh;
+
+        /* --- Page Containers --- */
+        /* Hide login and dashboard by default */
+        #page-login, #page-dashboard {
+            display: none;
         }
-        
-        .welcome-container {
+
+        /* --- Welcome Page Styles --- */
+        #page-welcome {
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -28,69 +33,224 @@
             background: linear-gradient(135deg, #6a6dd3, #3a3d9e);
             color: white;
             position: relative;
+            overflow: hidden;
         }
-        
-        .logo {
+        #page-welcome .welcome-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #page-welcome .logo {
             font-size: 60px;
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out 0.5s forwards;
-            line-height: 1;
         }
-        
-        h1 {
+        #page-welcome h1 {
             font-size: 42px;
             margin: 20px 0;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 1s ease-in-out 1s forwards;
         }
-        
-        .cta-button {
-            background-color: white;
-            color: #5052b5;
-            border: none;
-            border-radius: 30px;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
+        #page-welcome .cta-button {
+            background-color: white; color: #5052b5; border: none; border-radius: 30px;
+            padding: 15px 40px; font-size: 18px; font-weight: bold; cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 1s ease-in-out 2s forwards;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Include all other CSS rules from your original file */
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
         .demo-notice {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 12px;
-            padding: 0 20px;
+            position: absolute; bottom: 10px; width: 100%; text-align: center;
+            color: rgba(255, 255, 255, 0.7); font-size: 12px; padding: 0 20px;
         }
+
+        /* --- Login Page Styles --- */
+        #page-login {
+            font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex;
+            justify-content: center; align-items: center; height: 100vh; margin: 0;
+        }
+        #page-login .container {
+            background-color: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 40px; width: 100%; max-width: 450px; text-align: center;
+        }
+        #page-login h1 {
+            color: #3a3ab5; font-size: 24px; margin-bottom: 15px;
+        }
+        #page-login button {
+            background-color: #3a3ab5; color: white; border: none; padding: 14px 0;
+            width: 100%; font-size: 16px; cursor: pointer; border-radius: 5px;
+        }
+        #page-login #message-area {
+            min-height: 20px; margin-top: 10px; font-size: 14px; font-weight: bold;
+        }
+        #page-login .demo-notice {
+            position: static; color: #777; margin-top: 20px; font-size: 12px;
+        }
+        #page-login input {
+           width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;
+           box-sizing: border-box; font-size: 15px; margin-bottom: 15px;
+        }
+
+        /* --- Dashboard Page Styles --- */
+        /* This is where the massive CSS from your notice-board file goes. */
+        /* For brevity, I will only include a few key rules here. */
+        /* YOU SHOULD PASTE YOUR FULL NOTICE BOARD CSS HERE */
+        :root {
+            --primary: #4e54c8; --secondary: #8f94fb; --light: #f9f9f9; --dark: #333;
+            --dark-bg: #1a1a1a; --dark-text: #e0e0e0; --dark-card: #2c2c2c;
+        }
+        #page-dashboard {
+            font-family: "Poppins", sans-serif; background: #f5f5dc; color: var(--dark);
+            line-height: 1.6; display: block; padding-top: 1px;
+        }
+        body.dark-mode #page-dashboard {
+             background: var(--dark-bg); color: var(--dark-text);
+        }
+        #page-dashboard .container {
+            max-width: 1200px; margin: 40px auto; padding: 30px; background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        body.dark-mode #page-dashboard .container { background: rgba(44, 44, 44, 0.95); }
+        #page-dashboard header h1 {
+            font-size: 36px; text-align: center; color: white; padding: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 15px 15px 0 0;
+        }
+        #page-dashboard .tab-container {
+            background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px; overflow: hidden;
+        }
+        body.dark-mode #page-dashboard .tab-container { background: var(--dark-card); }
+        #page-dashboard .tabs { display: flex; background: var(--light); }
+        body.dark-mode #page-dashboard .tabs { background: #333; }
+        #page-dashboard .tab { padding: 18px 25px; cursor: pointer; font-weight: 600; }
+        #page-dashboard .tab.active { color: var(--primary); border-bottom: 4px solid var(--primary); }
+        body.dark-mode #page-dashboard .tab.active { color: var(--primary-light); border-bottom-color: var(--primary-light); }
+        #page-dashboard .tab-content { display: none; padding: 25px; }
+        #page-dashboard .tab-content.active { display: block; }
+        #page-dashboard footer { text-align: center; padding: 25px 0; color: #666; }
+        #page-dashboard footer .demo-notice { position: static; color: inherit; }
     </style>
 </head>
 <body>
-    <div class="welcome-container">
-        <h1>Campus Connect</h1>
-        
-        <button class="cta-button" onclick="window.location.href='index.html'">Get Started</button>
-        
+
+    <div id="page-welcome">
+        <div class="welcome-content">
+            <div class="logo">🎓</div>
+            <h1>Campus Connect</h1>
+            <button class="cta-button" onclick="showPage('page-login')">Get Started</button>
+        </div>
         <div class="demo-notice">
             Note: This is a static web application for demonstration purposes. Backend functionality is simulated.
         </div>
     </div>
-    </body>
+
+    <div id="page-login">
+        <div class="container">
+            <div class="logo">🎓</div>
+            <h1>Student Portal</h1>
+            <p>Enter your email to receive an OTP</p>
+            <div id="message-area"></div>
+            <form id="otp-form">
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                <button type="submit">Send OTP</button>
+            </form>
+            <div class="demo-notice">
+                 Note: This is a static web application for demonstration purposes. Backend functionality is simulated.
+            </div>
+        </div>
+    </div>
+
+    <div id="page-dashboard">
+        <div class="container">
+            <header>
+                <h1><i class="fas fa-university header-icon"></i> UNIVERSITY NOTICE BOARD</h1>
+            </header>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" onclick="openTab(event, 'timetable')">Timetable</div>
+                    <div class="tab" onclick="openTab(event, 'events')">Events</div>
+                    <div class="tab" onclick="openTab(event, 'announcements')">Announcements</div>
+                </div>
+
+                <div id="timetable" class="tab-content active">
+                    <h2>Timetable</h2>
+                    <p>Timetable content goes here...</p>
+                </div>
+                <div id="events" class="tab-content">
+                    <h2>Events</h2>
+                    <p>Events content goes here...</p>
+                </div>
+                <div id="announcements" class="tab-content">
+                    <h2>Announcements</h2>
+                    <p>Announcements content goes here...</p>
+                </div>
+            </div>
+
+            <footer>
+                <div>© 2025 Campus Connect</div>
+                <div class="demo-notice">
+                    Note: This is a static web application built for demonstration purposes. All backend functionality is simulated using client-side JavaScript to showcase the user interface.
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // --- Core Page Navigation Logic ---
+        function showPage(pageId) {
+            // Hide all pages
+            document.getElementById('page-welcome').style.display = 'none';
+            document.getElementById('page-login').style.display = 'none';
+            document.getElementById('page-dashboard').style.display = 'none';
+
+            // Show the requested page
+            const pageToShow = document.getElementById(pageId);
+            // Use 'flex' for the centered pages, 'block' for the dashboard
+            if (pageId === 'page-dashboard') {
+                pageToShow.style.display = 'block';
+            } else {
+                pageToShow.style.display = 'flex';
+            }
+        }
+
+        // --- Login Page Simulation Logic ---
+        document.getElementById('otp-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent actual form submission
+            const email = document.getElementById('email').value;
+            const messageArea = document.getElementById('message-area');
+            if (!email) {
+                messageArea.textContent = 'Please enter an email address.';
+                messageArea.style.color = 'red';
+                return;
+            }
+            messageArea.textContent = 'Sending OTP...';
+            messageArea.style.color = 'blue';
+            setTimeout(function() {
+                messageArea.textContent = 'Success! Redirecting...';
+                messageArea.style.color = 'green';
+                setTimeout(function() {
+                    showPage('page-dashboard');
+                }, 1000);
+            }, 1500);
+        });
+
+        // --- Dashboard Tab Logic ---
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // --- Paste your other dashboard JS functions here (dark mode, timetable data, etc.) ---
+    </script>
+
+</body>
 </html>
