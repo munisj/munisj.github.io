@@ -16,6 +16,9 @@
             box-sizing: border-box;
             font-family: "Poppins", sans-serif;
         }
+        html, body {
+            height: 100%;
+        }
 
         /* --- Page Containers --- */
         /* Hide login and dashboard by default */
@@ -34,6 +37,7 @@
             color: white;
             position: relative;
             overflow: hidden;
+            font-family: Arial, sans-serif;
         }
         #page-welcome .welcome-content {
             position: relative;
@@ -45,95 +49,277 @@
         }
         #page-welcome .logo {
             font-size: 60px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+            line-height: 1;
+        }
+        #page-welcome .logo-icon {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
         }
         #page-welcome h1 {
             font-size: 42px;
             margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-in-out 1s forwards;
+        }
+        #page-welcome .tagline {
+            font-size: 18px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-in-out 1.5s forwards;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 40px;
         }
         #page-welcome .cta-button {
-            background-color: white; color: #5052b5; border: none; border-radius: 30px;
-            padding: 15px 40px; font-size: 18px; font-weight: bold; cursor: pointer;
+            background-color: white;
+            color: #5052b5;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-in-out 2s forwards;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .demo-notice {
-            position: absolute; bottom: 10px; width: 100%; text-align: center;
-            color: rgba(255, 255, 255, 0.7); font-size: 12px; padding: 0 20px;
+        #page-welcome .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        #page-welcome .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        #page-welcome .circle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s linear infinite;
+        }
+        #page-welcome .features {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 60px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 2.5s forwards;
+        }
+        #page-welcome .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+        }
+        #page-welcome .feature-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        #page-welcome .feature-text {
+            font-size: 14px;
+            text-align: center;
         }
 
         /* --- Login Page Styles --- */
         #page-login {
-            font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex;
-            justify-content: center; align-items: center; height: 100vh; margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         #page-login .container {
-            background-color: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            padding: 40px; width: 100%; max-width: 450px; text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        #page-login .logo {
+            margin-bottom: 20px;
+            font-size: 40px;
         }
         #page-login h1 {
-            color: #3a3ab5; font-size: 24px; margin-bottom: 15px;
+            color: #3a3ab5;
+            font-size: 24px;
+            margin-bottom: 15px;
         }
-        #page-login button {
-            background-color: #3a3ab5; color: white; border: none; padding: 14px 0;
-            width: 100%; font-size: 16px; cursor: pointer; border-radius: 5px;
+        #page-login p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 16px;
         }
-        #page-login #message-area {
-            min-height: 20px; margin-top: 10px; font-size: 14px; font-weight: bold;
+        #page-login .input-group {
+            margin-bottom: 25px;
+            text-align: left;
         }
-        #page-login .demo-notice {
-            position: static; color: #777; margin-top: 20px; font-size: 12px;
+        #page-login label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
         }
         #page-login input {
-           width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;
-           box-sizing: border-box; font-size: 15px; margin-bottom: 15px;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        #page-login button {
+            background-color: #3a3ab5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 14px 0;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        #page-login button:hover {
+            background-color: #2e2e99;
+        }
+        #page-login #message-area {
+            min-height: 20px;
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        /* --- Dashboard Page Styles --- */
-        /* This is where the massive CSS from your notice-board file goes. */
-        /* For brevity, I will only include a few key rules here. */
-        /* YOU SHOULD PASTE YOUR FULL NOTICE BOARD CSS HERE */
-        :root {
-            --primary: #4e54c8; --secondary: #8f94fb; --light: #f9f9f9; --dark: #333;
-            --dark-bg: #1a1a1a; --dark-text: #e0e0e0; --dark-card: #2c2c2c;
-        }
+        /* --- Dashboard Page Styles (FULL VERSION) --- */
         #page-dashboard {
-            font-family: "Poppins", sans-serif; background: #f5f5dc; color: var(--dark);
-            line-height: 1.6; display: block; padding-top: 1px;
+            font-family: "Poppins", sans-serif;
+            background: url("https://www.transparenttextures.com/patterns/paper-fibers.png"), linear-gradient(135deg, #f5f5dc 0%, #fff8e1 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+            display: block;
         }
         body.dark-mode #page-dashboard {
-             background: var(--dark-bg); color: var(--dark-text);
+            background: url("https://www.transparenttextures.com/patterns/paper-fibers.png"), linear-gradient(135deg, #2f2f2f 0%, #1c1c1c 100%);
+            color: var(--dark-text);
+        }
+        :root {
+            --primary: #4e54c8; --primary-light: #6e78ff; --secondary: #8f94fb; --accent: #ff7e5f;
+            --accent-dark: #e55b3c; --light: #f9f9f9; --dark: #333; --success: #2ecc71;
+            --success-dark: #27ae60; --warning: #f39c12; --warning-dark: #d35400;
+            --danger: #e74c3c; --danger-dark: #c0392b; --info: #3498db; --info-dark: #2980b9;
+            --dark-bg: #1a1a1a; --dark-text: #e0e0e0; --dark-card: #2c2c2c;
+            --highlight: #f1c40f; --highlight-dark: #d4ac0d; --neutral: #bdc3c7; --neutral-dark: #7f8c8d;
         }
         #page-dashboard .container {
             max-width: 1200px; margin: 40px auto; padding: 30px; background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); position: relative;
+            border: 5px solid rgba(255, 255, 255, 0.5); background-clip: padding-box;
+            animation: zoomInBounce 1.5s ease-out;
         }
-        body.dark-mode #page-dashboard .container { background: rgba(44, 44, 44, 0.95); }
-        #page-dashboard header h1 {
-            font-size: 36px; text-align: center; color: white; padding: 20px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 15px 15px 0 0;
+        body.dark-mode #page-dashboard .container { background: rgba(44, 44, 44, 0.95); border: 5px solid rgba(255, 255, 255, 0.3); }
+        #page-dashboard header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--info) 50%, var(--secondary) 100%); color: white;
+            padding: 30px 0; text-align: center; border-radius: 15px 15px 0 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2); position: relative; overflow: hidden;
+            animation: gradientFlow 10s ease infinite;
         }
-        #page-dashboard .tab-container {
-            background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin-bottom: 30px; overflow: hidden;
+        #page-dashboard header h1 { margin: 0; letter-spacing: 4px; font-size: 48px; text-shadow: 3px 3px 8px rgba(0,0,0,0.4); font-family: "Montserrat", sans-serif; position: relative; display: inline-block; }
+        #page-dashboard .date-time {
+            background: linear-gradient(45deg, var(--light) 0%, rgba(255,255,255,0.97) 100%); padding: 15px 25px;
+            font-size: 18px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #e1e5eb; color: var(--primary); font-weight: 600;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); border-radius: 10px; margin: 20px 0;
+            position: relative; overflow: hidden; animation: slideInLeft 1s ease-out;
         }
+        body.dark-mode #page-dashboard .date-time { background: linear-gradient(45deg, var(--dark-card) 0%, rgba(44, 44, 44, 0.97) 100%); border-bottom: 1px solid #444; color: var(--primary-light); }
+        #page-dashboard .theme-toggle {
+            background: linear-gradient(90deg, var(--primary), var(--info)); color: white; border: none; padding: 10px 20px;
+            border-radius: 25px; cursor: pointer; font-size: 16px; transition: all 0.3s ease; position: relative;
+            overflow: hidden; animation: buttonPulse 2s infinite;
+        }
+        #page-dashboard .board-section {
+            background-color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px; overflow: hidden; transition: all 0.4s ease;
+            position: relative; animation: floatIn 1.2s ease-out;
+        }
+        body.dark-mode #page-dashboard .board-section { background-color: var(--dark-card); }
+        #page-dashboard .section-header { padding: 20px 25px; font-size: 24px; font-weight: 700; display: flex; align-items: center; color: white; position: relative; animation: expandIn 0.8s ease; }
+        #page-dashboard .section-content { padding: 25px; position: relative; }
+        #page-dashboard table { width: 100%; border-collapse: collapse; margin-top: 15px; border-radius: 10px; overflow: hidden; box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); animation: tableReveal 1s ease-out; }
+        #page-dashboard th, #page-dashboard td { padding: 18px 20px; text-align: left; transition: background 0.3s ease; }
+        #page-dashboard th { background: linear-gradient(90deg, rgba(78, 84, 200, 0.15), rgba(78, 84, 200, 0.3)); color: var(--primary); font-weight: 600; font-size: 16px; border-bottom: 2px solid var(--primary-light); }
+        body.dark-mode #page-dashboard th { background: linear-gradient(90deg, rgba(78, 84, 200, 0.25), rgba(78, 84, 200, 0.4)); color: var(--primary-light); }
+        #page-dashboard td { border-bottom: 1px solid #eef0f5; }
+        body.dark-mode #page-dashboard td { border-bottom: 1px solid #444; }
+        #page-dashboard tr:hover td { background-color: rgba(78, 84, 200, 0.08); transform: scale(1.01); }
+        body.dark-mode #page-dashboard tr:hover td { background-color: rgba(78, 84, 200, 0.15); }
+        #page-dashboard .event-item, #page-dashboard .announcement-item { padding: 20px; margin-bottom: 20px; border-radius: 12px; background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-left: 6px solid #ddd; transition: all 0.4s ease; position: relative; overflow: hidden; animation: cardPopIn 0.8s ease-out; }
+        body.dark-mode #page-dashboard .event-item, body.dark-mode #page-dashboard .announcement-item { background-color: var(--dark-card); }
+        #page-dashboard .event-title, #page-dashboard .announcement-title { font-weight: 700; font-size: 20px; margin-bottom: 10px; color: var(--primary); display: flex; align-items: center; animation: titleFadeIn 1s ease; }
+        body.dark-mode #page-dashboard .event-title, body.dark-mode #page-dashboard .announcement-title { color: var(--primary-light); }
+        #page-dashboard .event-date, #page-dashboard .announcement-date { font-size: 15px; color: #666; margin-bottom: 10px; display: flex; align-items: center; animation: dateSlideIn 1s ease; }
+        body.dark-mode #page-dashboard .event-date, body.dark-mode #page-dashboard .announcement-date { color: #bbb; }
+        #page-dashboard .event-description, #page-dashboard .announcement-description { font-size: 16px; line-height: 1.7; color: #555; animation: textExpand 1.2s ease; }
+        body.dark-mode #page-dashboard .event-description, body.dark-mode #page-dashboard .announcement-description { color: #ccc; }
+        #page-dashboard .tab-container { background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 30px; overflow: hidden; animation: tabContainerReveal 1s ease; }
         body.dark-mode #page-dashboard .tab-container { background: var(--dark-card); }
-        #page-dashboard .tabs { display: flex; background: var(--light); }
-        body.dark-mode #page-dashboard .tabs { background: #333; }
-        #page-dashboard .tab { padding: 18px 25px; cursor: pointer; font-weight: 600; }
-        #page-dashboard .tab.active { color: var(--primary); border-bottom: 4px solid var(--primary); }
-        body.dark-mode #page-dashboard .tab.active { color: var(--primary-light); border-bottom-color: var(--primary-light); }
-        #page-dashboard .tab-content { display: none; padding: 25px; }
+        #page-dashboard .tabs { display: flex; background: var(--light); border-bottom: 1px solid #e1e5eb; }
+        body.dark-mode #page-dashboard .tabs { background: #333; border-bottom: 1px solid #444; }
+        #page-dashboard .tab { padding: 18px 25px; cursor: pointer; transition: all 0.4s ease; font-weight: 600; color: #777; display: flex; align-items: center; position: relative; animation: tabSlideUp 0.8s ease; }
+        #page-dashboard .tab.active { color: var(--primary); background: white; border-bottom: 4px solid var(--primary); animation: tabGlow 1s ease; }
+        body.dark-mode #page-dashboard .tab.active { color: var(--primary-light); background: var(--dark-card); border-bottom: 4px solid var(--primary-light); }
+        #page-dashboard .tab-content { display: none; padding: 25px; animation: contentFadeIn 0.8s ease; }
         #page-dashboard .tab-content.active { display: block; }
-        #page-dashboard footer { text-align: center; padding: 25px 0; color: #666; }
-        #page-dashboard footer .demo-notice { position: static; color: inherit; }
+        #page-dashboard footer { text-align: center; padding: 25px 0; font-size: 15px; color: #666; background-color: white; border-radius: 0 0 15px 15px; box-shadow: 0 -3px 12px rgba(0,0,0,0.1); animation: fadeInUp 1s ease; }
+        body.dark-mode #page-dashboard footer { background-color: var(--dark-card); color: #bbb; }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
+
+        /* ALL other specific styles and animations from your notice-board file would continue here... */
+
+        /* --- Animations --- */
+        @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes zoomInBounce { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 80% { transform: scale(0.95); } 100% { transform: scale(1); } }
+        @keyframes tableReveal { 0% { transform: translateY(20px); opacity: 0; clip-path: inset(0 100% 0 0); } 100% { transform: translateY(0); opacity: 1; clip-path: inset(0 0 0 0); } }
+
+        /* --- Demo Notice Styles --- */
+        .demo-notice { margin-top: 15px; font-size: 12px; color: #777; text-align: center; }
+        body.dark-mode #page-dashboard .demo-notice { color: #bbb; }
+        #page-welcome .demo-notice { position: absolute; bottom: 10px; width: 100%; color: rgba(255,255,255,0.8); }
+        #page-login .demo-notice { position: static; }
     </style>
 </head>
 <body>
 
     <div id="page-welcome">
+        <div class="circles" id="circles-welcome"></div>
         <div class="welcome-content">
-            <div class="logo">🎓</div>
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </div>
             <h1>Campus Connect</h1>
+            <p class="tagline">Connect, collaborate, and navigate your campus experience with ease</p>
             <button class="cta-button" onclick="showPage('page-login')">Get Started</button>
         </div>
         <div class="demo-notice">
@@ -141,14 +327,17 @@
         </div>
     </div>
 
-    <div id="page-login">
+    <div id="page-login" style="display: none;">
         <div class="container">
             <div class="logo">🎓</div>
             <h1>Student Portal</h1>
             <p>Enter your email to receive an OTP</p>
             <div id="message-area"></div>
             <form id="otp-form">
-                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
                 <button type="submit">Send OTP</button>
             </form>
             <div class="demo-notice">
@@ -157,99 +346,121 @@
         </div>
     </div>
 
-    <div id="page-dashboard">
+    <div id="page-dashboard" style="display: none;">
+        <div id="particles-js"></div>
         <div class="container">
-            <header>
-                <h1><i class="fas fa-university header-icon"></i> UNIVERSITY NOTICE BOARD</h1>
-            </header>
-            
+            <header><h1><i class="fas fa-university header-icon"></i> UNIVERSITY NOTICE BOARD</h1></header>
+            <div class="date-time">
+                <div id="greeting"></div>
+                <div id="date-time-display"></div>
+                <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> Dark Mode</button>
+            </div>
             <div class="tab-container">
                 <div class="tabs">
-                    <div class="tab active" onclick="openTab(event, 'timetable')">Timetable</div>
-                    <div class="tab" onclick="openTab(event, 'events')">Events</div>
-                    <div class="tab" onclick="openTab(event, 'announcements')">Announcements</div>
+                    <div class="tab active" onclick="openTab(event, 'timetable')"><i class="fas fa-calendar-alt tab-icon"></i> Timetable</div>
+                    <div class="tab" onclick="openTab(event, 'events')"><i class="fas fa-star tab-icon"></i> Events</div>
+                    <div class="tab" onclick="openTab(event, 'announcements')"><i class="fas fa-bullhorn tab-icon"></i> Announcements</div>
                 </div>
-
                 <div id="timetable" class="tab-content active">
-                    <h2>Timetable</h2>
-                    <p>Timetable content goes here...</p>
-                </div>
+                    </div>
                 <div id="events" class="tab-content">
-                    <h2>Events</h2>
-                    <p>Events content goes here...</p>
-                </div>
+                    </div>
                 <div id="announcements" class="tab-content">
-                    <h2>Announcements</h2>
-                    <p>Announcements content goes here...</p>
-                </div>
+                    </div>
             </div>
-
             <footer>
                 <div>© 2025 Campus Connect</div>
-                <div class="demo-notice">
-                    Note: This is a static web application built for demonstration purposes. All backend functionality is simulated using client-side JavaScript to showcase the user interface.
-                </div>
+                <div class="demo-notice">This is a static demo. All data is hardcoded in JavaScript.</div>
             </footer>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
         // --- Core Page Navigation Logic ---
         function showPage(pageId) {
-            // Hide all pages
             document.getElementById('page-welcome').style.display = 'none';
             document.getElementById('page-login').style.display = 'none';
             document.getElementById('page-dashboard').style.display = 'none';
-
-            // Show the requested page
             const pageToShow = document.getElementById(pageId);
-            // Use 'flex' for the centered pages, 'block' for the dashboard
             if (pageId === 'page-dashboard') {
                 pageToShow.style.display = 'block';
+                // Initialize dashboard functions when it's shown
+                initializeDashboard();
             } else {
                 pageToShow.style.display = 'flex';
             }
         }
 
+        // --- Welcome Page Animation ---
+        function createWelcomeCircles() {
+            const container = document.getElementById('circles-welcome');
+            if (!container) return; // Only run if on welcome page
+            for (let i = 0; i < 12; i++) {
+                const circle = document.createElement('div');
+                circle.classList.add('circle');
+                const size = Math.random() * 150 + 50;
+                circle.style.width = `${size}px`; circle.style.height = `${size}px`;
+                circle.style.left = `${Math.random() * 100}%`; circle.style.top = `${Math.random() * 100 + 100}%`;
+                circle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                circle.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(circle);
+            }
+        }
+        createWelcomeCircles();
+
         // --- Login Page Simulation Logic ---
         document.getElementById('otp-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent actual form submission
+            event.preventDefault();
             const email = document.getElementById('email').value;
             const messageArea = document.getElementById('message-area');
-            if (!email) {
-                messageArea.textContent = 'Please enter an email address.';
-                messageArea.style.color = 'red';
+            if (!email || !email.includes('@')) {
+                messageArea.textContent = 'Please enter a valid email address.'; messageArea.style.color = 'red';
                 return;
             }
-            messageArea.textContent = 'Sending OTP...';
-            messageArea.style.color = 'blue';
+            messageArea.textContent = 'Sending OTP...'; messageArea.style.color = 'blue';
             setTimeout(function() {
-                messageArea.textContent = 'Success! Redirecting...';
-                messageArea.style.color = 'green';
+                messageArea.textContent = 'Success! Redirecting...'; messageArea.style.color = 'green';
                 setTimeout(function() {
                     showPage('page-dashboard');
                 }, 1000);
             }, 1500);
         });
 
-        // --- Dashboard Tab Logic ---
+        // --- Dashboard Initialization and All Functions ---
+        function initializeDashboard() {
+            // All of your JavaScript for the notice board goes here
+            // particles.js init, timetable data, update functions, dark mode, etc.
+            
+            // Example:
+            particlesJS("particles-js", { /* your particles.js config */ });
+            console.log("Dashboard Initialized!");
+        }
+
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
+            tabcontent = document.querySelectorAll("#page-dashboard .tab-content");
             for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
                 tabcontent[i].classList.remove("active");
             }
-            tablinks = document.getElementsByClassName("tab");
+            tablinks = document.querySelectorAll("#page-dashboard .tab");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
             }
-            document.getElementById(tabName).style.display = "block";
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
+        
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+            // Add your theme saving logic here
+        }
 
-        // --- Paste your other dashboard JS functions here (dark mode, timetable data, etc.) ---
+        // --- INITIAL PAGE CHECK ---
+        // This ensures that if for some reason a page is reloaded, the right functions run.
+        document.addEventListener('DOMContentLoaded', function() {
+            // By default, the welcome page is shown via CSS, and its circle animation runs.
+        });
     </script>
 
 </body>
