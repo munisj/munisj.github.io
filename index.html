@@ -6,288 +6,1250 @@
     <title>Campus Connect - Digital Notice Board</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- General Styles --- */
+        /* --- Modern CSS Reset and Variables --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #8b5cf6;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --backdrop-blur: 20px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+
         html, body {
             height: 100%;
-            font-family: "Poppins", sans-serif;
+            font-family: "Inter", sans-serif;
+            scroll-behavior: smooth;
         }
 
         /* --- Page Containers --- */
-        /* Hide login and dashboard by default */
         #page-login, #page-student-details, #page-dashboard {
             display: none;
         }
 
-        /* --- Welcome Page Styles --- */
+        /* --- Welcome Page with Modern Hero Design --- */
         #page-welcome {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #6a6dd3, #3a3d9e);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             position: relative;
             overflow: hidden;
-            font-family: Arial, sans-serif;
         }
+
+        #page-welcome::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+
         #page-welcome .welcome-content {
-            position: relative; z-index: 2; display: flex; flex-direction: column;
-            align-items: center; text-align: center;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
         }
-        #page-welcome .logo { font-size: 60px; opacity: 0; animation: fadeIn 1s ease-in-out 0.5s forwards; line-height: 1; }
-        #page-welcome .logo-icon { display: inline-block; width: 60px; height: 60px; }
-        #page-welcome h1 { font-size: 42px; margin: 20px 0; opacity: 0; transform: translateY(20px); animation: slideUp 1s ease-in-out 1s forwards; }
-        #page-welcome .tagline { font-size: 18px; opacity: 0; transform: translateY(20px); animation: slideUp 1s ease-in-out 1.5s forwards; text-align: center; max-width: 600px; margin-bottom: 40px; }
+
+        #page-welcome .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: scale(0.5) rotate(-10deg);
+            animation: logoEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+        }
+
+        #page-welcome .logo-icon {
+            display: inline-block;
+            width: 4rem;
+            height: 4rem;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+        }
+
+        #page-welcome h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUpFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #page-welcome .tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
         #page-welcome .cta-button {
-            background-color: white; color: #5052b5; border: none; border-radius: 30px;
-            padding: 15px 40px; font-size: 18px; font-weight: bold; cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s; opacity: 0; transform: translateY(20px);
-            animation: slideUp 1s ease-in-out 2s forwards; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: var(--primary);
+            border: none;
+            border-radius: 2rem;
+            padding: 1rem 3rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            animation: buttonEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1) 2s forwards;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            overflow: hidden;
         }
-        #page-welcome .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); }
-        #page-welcome .circles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; }
-        #page-welcome .circle { position: absolute; background: rgba(255, 255, 255, 0.1); border-radius: 50%; animation: float 15s linear infinite; }
-        #page-welcome .features { display: flex; justify-content: space-around; width: 100%; max-width: 800px; margin-top: 60px; opacity: 0; animation: fadeIn 1s ease-in-out 2.5s forwards; }
-        #page-welcome .feature { display: flex; flex-direction: column; align-items: center; margin: 0 20px; }
-        #page-welcome .feature-icon { font-size: 32px; margin-bottom: 15px; }
-        #page-welcome .feature-text { font-size: 14px; text-align: center; }
 
-        /* --- Login & Student Details Page Styles (Shared) --- */
+        #page-welcome .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        #page-welcome .cta-button:hover::before {
+            left: 100%;
+        }
+
+        #page-welcome .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        #page-welcome .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 4rem;
+            opacity: 0;
+            animation: featuresSlideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards;
+        }
+
+        #page-welcome .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--backdrop-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #page-welcome .feature:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        #page-welcome .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        #page-welcome .feature-text {
+            font-size: 0.875rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Floating particles */
+        #page-welcome .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #page-welcome .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 15s linear infinite;
+        }
+
+        /* --- Login & Student Details Pages --- */
         #page-login, #page-student-details {
-            font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex;
-            justify-content: center; align-items: center; height: 100vh; margin: 0;
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 1rem;
         }
-        .form-container {
-            background-color: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            padding: 40px; width: 100%; max-width: 450px; text-align: center;
-        }
-        .form-container .logo { margin-bottom: 20px; font-size: 40px; }
-        .form-container h1 { color: #3a3ab5; font-size: 24px; margin-bottom: 15px; }
-        .form-container p { color: #555; margin-bottom: 30px; font-size: 16px; }
-        .form-container .input-group { margin-bottom: 20px; text-align: left; }
-        .form-container label { display: block; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 15px; }
-        .form-container input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 15px; }
-        .form-container button {
-            background-color: #3a3ab5; color: white; border: none; border-radius: 5px; padding: 14px 0;
-            width: 100%; font-size: 16px; cursor: pointer; margin-top: 10px;
-        }
-        .form-container button:hover { background-color: #2e2e99; }
-        #page-login #message-area { min-height: 20px; margin-bottom: 15px; font-size: 14px; font-weight: bold; }
 
-        /* --- Dashboard Page Styles (FULL VERSION) --- */
-        :root {
-            --primary: #4e54c8; --primary-light: #6e78ff; --secondary: #8f94fb; --accent: #ff7e5f;
-            --accent-dark: #e55b3c; --light: #f9f9f9; --dark: #333; --success: #2ecc71;
-            --success-dark: #27ae60; --warning: #f39c12; --warning-dark: #d35400;
-            --danger: #e74c3c; --danger-dark: #c0392b; --info: #3498db; --info-dark: #2980b9;
-            --dark-bg: #1a1a1a; --dark-text: #e0e0e0; --dark-card: #2c2c2c;
-            --highlight: #f1c40f; --highlight-dark: #d4ac0d; --neutral: #bdc3c7; --neutral-dark: #7f8c8d;
+        .form-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--backdrop-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-2xl);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            color: white;
+            animation: formSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+
+        .form-container .logo {
+            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            animation: logoSpin 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+        }
+
+        .form-container h1 {
+            color: white;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: titleFadeIn 0.6s ease-out 0.4s forwards;
+        }
+
+        .form-container p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            opacity: 0;
+            animation: titleFadeIn 0.6s ease-out 0.6s forwards;
+        }
+
+        .form-container .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            opacity: 0;
+            animation: inputSlideIn 0.6s ease-out 0.8s forwards;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-container input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-container input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-container button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 1rem 0;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            animation: buttonSlideUp 0.6s ease-out 1s forwards;
+        }
+
+        .form-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        #page-login #message-area {
+            min-height: 20px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* --- Dashboard Page --- */
         #page-dashboard {
-            font-family: "Poppins", sans-serif; background: url("https://www.transparenttextures.com/patterns/paper-fibers.png"), linear-gradient(135deg, #f5f5dc 0%, #fff8e1 100%);
-            color: var(--dark); line-height: 1.6; position: relative; overflow-x: hidden; transition: background 0.5s ease;
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: all 0.3s ease;
         }
-        body.dark-mode #page-dashboard { background: url("https://www.transparenttextures.com/patterns/paper-fibers.png"), linear-gradient(135deg, #2f2f2f 0%, #1c1c1c 100%); color: var(--dark-text); }
+
+        body.dark-mode #page-dashboard {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--gray-100);
+        }
+
         #page-dashboard .container {
-            max-width: 1200px; margin: 40px auto; padding: 30px; background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); position: relative;
-            border: 5px solid rgba(255, 255, 255, 0.5); background-clip: padding-box; animation: zoomInBounce 1.5s ease-out;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: containerFadeIn 0.8s ease-out;
         }
-        #page-dashboard .container::before {
-            content: ""; position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px;
-            background: url("https://www.transparenttextures.com/patterns/vine.png");
-            opacity: 0.15; z-index: -1; border-radius: 25px; animation: rippleEffect 8s infinite;
-        }
-        body.dark-mode #page-dashboard .container { background: rgba(44, 44, 44, 0.95); border: 5px solid rgba(255, 255, 255, 0.3); }
+
         #page-dashboard header {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--info) 50%, var(--secondary) 100%); color: white;
-            padding: 30px 0; text-align: center; border-radius: 15px 15px 0 0; box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-            position: relative; overflow: hidden; animation: gradientFlow 10s ease infinite;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-2xl);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
         }
-        #page-dashboard header::after {
-            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: lightSweep 4s infinite;
+
+        #page-dashboard header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: headerShimmer 6s ease-in-out infinite;
         }
-        #page-dashboard header h1 { margin: 0; letter-spacing: 4px; font-size: 48px; text-shadow: 3px 3px 8px rgba(0,0,0,0.4); font-family: "Montserrat", sans-serif; position: relative; display: inline-block; }
-        #page-dashboard .header-icon { font-size: 32px; margin-right: 15px; vertical-align: middle; animation: spinAndScale 2s infinite; }
+
+        #page-dashboard header h1 {
+            margin: 0;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            position: relative;
+            z-index: 1;
+        }
+
+        #page-dashboard .header-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            vertical-align: middle;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
         #page-dashboard .date-time {
-            background: linear-gradient(45deg, var(--light) 0%, rgba(255,255,255,0.97) 100%); padding: 15px 25px;
-            font-size: 18px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid #e1e5eb; color: var(--primary); font-weight: 600;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1); border-radius: 10px; margin: 20px 0;
-            position: relative; overflow: hidden; animation: slideInLeft 1s ease-out;
+            background: var(--white);
+            padding: 1.5rem 2rem;
+            font-size: 1.125rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            color: var(--gray-700);
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-        #page-dashboard .date-time:hover { transform: scale(1.02) rotate(1deg); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        body.dark-mode #page-dashboard .date-time { background: linear-gradient(45deg, var(--dark-card) 0%, rgba(44, 44, 44, 0.97) 100%); border-bottom: 1px solid #444; color: var(--primary-light); }
+
+        #page-dashboard .date-time:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        body.dark-mode #page-dashboard .date-time {
+            background: var(--gray-800);
+            color: var(--gray-100);
+        }
+
         #page-dashboard .theme-toggle {
-            background: linear-gradient(90deg, var(--primary), var(--info)); color: white; border: none; padding: 10px 20px;
-            border-radius: 25px; cursor: pointer; font-size: 16px; transition: all 0.3s ease; position: relative;
-            overflow: hidden; animation: buttonPulse 2s infinite;
+            background: linear-gradient(135deg, var(--gray-700) 0%, var(--gray-900) 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
         }
-        #page-dashboard .theme-toggle:hover { background: linear-gradient(90deg, var(--primary-light), var(--info-dark)); transform: scale(1.1) rotate(5deg); }
-        #page-dashboard .theme-toggle::before {
-            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); transition: 0.5s;
+
+        #page-dashboard .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
-        #page-dashboard .theme-toggle:hover::before { left: 100%; }
-        #page-dashboard .board-section {
-            background-color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin-bottom: 30px; overflow: hidden; transition: all 0.4s ease;
-            position: relative; animation: floatIn 1.2s ease-out;
+
+        /* Weather Widget */
+        #page-dashboard .weather-widget {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
         }
-        #page-dashboard .board-section:hover { transform: translateY(-10px) rotate(2deg); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        body.dark-mode #page-dashboard .board-section { background-color: var(--dark-card); }
-        #page-dashboard .section-header { padding: 20px 25px; font-size: 24px; font-weight: 700; display: flex; align-items: center; color: white; position: relative; animation: expandIn 0.8s ease; }
-        #page-dashboard .timetable-header { background: linear-gradient(90deg, var(--info) 0%, var(--info-dark) 100%); }
-        #page-dashboard .events-header { background: linear-gradient(90deg, var(--success) 0%, var(--success-dark) 100%); }
-        #page-dashboard .announcements-header { background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%); }
-        #page-dashboard .section-icon { margin-right: 12px; font-size: 28px; animation: bounceAndRotate 2s infinite; }
-        #page-dashboard .section-content { padding: 25px; position: relative; }
-        #page-dashboard table { width: 100%; border-collapse: collapse; margin-top: 15px; border-radius: 10px; overflow: hidden; box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); animation: tableReveal 1s ease-out; }
-        #page-dashboard th, td { padding: 18px 20px; text-align: left; transition: background 0.3s ease; }
-        #page-dashboard th { background: linear-gradient(90deg, rgba(78, 84, 200, 0.15), rgba(78, 84, 200, 0.3)); color: var(--primary); font-weight: 600; font-size: 16px; border-bottom: 2px solid var(--primary-light); }
-        body.dark-mode #page-dashboard th { background: linear-gradient(90deg, rgba(78, 84, 200, 0.25), rgba(78, 84, 200, 0.4)); color: var(--primary-light); }
-        #page-dashboard td { border-bottom: 1px solid #eef0f5; }
-        body.dark-mode #page-dashboard td { border-bottom: 1px solid #444; }
-        #page-dashboard tr:hover td { background-color: rgba(78, 84, 200, 0.08); transform: scale(1.01); }
-        body.dark-mode #page-dashboard tr:hover td { background-color: rgba(78, 84, 200, 0.15); }
-        #page-dashboard .lunch-break { text-align: center; background-color: #f8f9fa; font-weight: 500; color: #666; animation: heartbeat 1.5s infinite; }
-        body.dark-mode #page-dashboard .lunch-break { background-color: #333; color: #bbb; }
-        #page-dashboard .event-item, #page-dashboard .announcement-item { padding: 20px; margin-bottom: 20px; border-radius: 12px; background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-left: 6px solid #ddd; transition: all 0.4s ease; position: relative; overflow: hidden; animation: cardPopIn 0.8s ease-out; }
-        #page-dashboard .event-item:hover, #page-dashboard .announcement-item:hover { transform: translateX(15px) rotate(3deg); box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-left-color: var(--highlight); }
-        body.dark-mode #page-dashboard .event-item, body.dark-mode #page-dashboard .announcement-item { background-color: var(--dark-card); }
-        #page-dashboard .event-title, #page-dashboard .announcement-title { font-weight: 700; font-size: 20px; margin-bottom: 10px; color: var(--primary); display: flex; align-items: center; animation: titleFadeIn 1s ease; }
-        body.dark-mode #page-dashboard .event-title, body.dark-mode #page-dashboard .announcement-title { color: var(--primary-light); }
-        #page-dashboard .event-date, #page-dashboard .announcement-date { font-size: 15px; color: #666; margin-bottom: 10px; display: flex; align-items: center; animation: dateSlideIn 1s ease; }
-        body.dark-mode #page-dashboard .event-date, body.dark-mode #page-dashboard .announcement-date { color: #bbb; }
-        #page-dashboard .date-icon, #page-dashboard .title-icon { margin-right: 10px; color: var(--primary); animation: iconWobble 2s infinite; }
-        body.dark-mode #page-dashboard .date-icon, body.dark-mode #page-dashboard .title-icon { color: var(--primary-light); }
-        #page-dashboard .event-description, #page-dashboard .announcement-description { font-size: 16px; line-height: 1.7; color: #555; animation: textExpand 1.2s ease; }
-        body.dark-mode #page-dashboard .event-description, body.dark-mode #page-dashboard .announcement-description { color: #ccc; }
-        #page-dashboard .important { border-left: 6px solid var(--danger); background-color: rgba(231, 76, 60, 0.08); }
-        body.dark-mode #page-dashboard .important { background-color: rgba(231, 76, 60, 0.15); }
-        #page-dashboard .badge { display: inline-block; padding: 6px 12px; font-size: 13px; font-weight: bold; border-radius: 25px; margin-right: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); text-transform: uppercase; transition: transform 0.3s ease; animation: badgeSpinIn 0.8s ease-out; }
-        #page-dashboard .badge:hover { transform: rotateY(360deg) scale(1.1); }
-        #page-dashboard .badge-important { background: linear-gradient(45deg, var(--danger), var(--danger-dark)); color: white; }
-        #page-dashboard .badge-academic { background: linear-gradient(45deg, var(--info), var(--info-dark)); color: white; }
-        #page-dashboard .badge-cultural { background: linear-gradient(45deg, #9b59b6, #8e44ad); color: white; }
-        #page-dashboard .badge-sports { background: linear-gradient(45deg, var(--success), var(--success-dark)); color: white; }
-        #page-dashboard .badge-deadline { background: linear-gradient(45deg, var(--warning), var(--warning-dark)); color: white; }
-        #page-dashboard footer { text-align: center; padding: 25px 0; font-size: 15px; color: #666; background-color: white; border-radius: 0 0 15px 15px; box-shadow: 0 -3px 12px rgba(0,0,0,0.1); animation: fadeInUp 1s ease; }
-        body.dark-mode #page-dashboard footer { background-color: var(--dark-card); color: #bbb; }
-        #page-dashboard .quick-links { display: flex; justify-content: center; margin-top: 15px; }
-        #page-dashboard .quick-link { margin: 0 15px; color: var(--primary); text-decoration: none; transition: all 0.3s ease; position: relative; animation: linkPop 0.5s ease forwards; }
-        #page-dashboard .quick-link:hover { color: var(--highlight); transform: translateY(-5px) rotate(2deg); }
-        #page-dashboard .quick-link::after { content: ""; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: var(--highlight); transition: width 0.3s ease; }
-        #page-dashboard .quick-link:hover::after { width: 100%; }
-        #page-dashboard .tab-container { background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 30px; overflow: hidden; animation: tabContainerReveal 1s ease; }
-        body.dark-mode #page-dashboard .tab-container { background: var(--dark-card); }
-        #page-dashboard .tabs { display: flex; background: var(--light); border-bottom: 1px solid #e1e5eb; }
-        body.dark-mode #page-dashboard .tabs { background: #333; border-bottom: 1px solid #444; }
-        #page-dashboard .tab { padding: 18px 25px; cursor: pointer; transition: all 0.4s ease; font-weight: 600; color: #777; display: flex; align-items: center; position: relative; animation: tabSlideUp 0.8s ease; }
-        #page-dashboard .tab:hover:not(.active) { background: linear-gradient(45deg, rgba(78, 84, 200, 0.1), rgba(78, 84, 200, 0.2)); color: var(--primary-light); transform: translateY(-5px) rotate(2deg); }
-        #page-dashboard .tab.active { color: var(--primary); background: white; border-bottom: 4px solid var(--primary); animation: tabGlow 1s ease; }
-        body.dark-mode #page-dashboard .tab.active { color: var(--primary-light); background: var(--dark-card); border-bottom: 4px solid var(--primary-light); }
-        #page-dashboard .tab-icon { margin-right: 10px; font-size: 20px; animation: iconSwing 2s infinite; }
-        #page-dashboard .tab-content { display: none; padding: 25px; animation: contentFadeIn 0.8s ease; }
-        #page-dashboard .tab-content.active { display: block; }
-        #page-dashboard .weather-widget { background: linear-gradient(135deg, var(--info), var(--info-dark), var(--primary)); color: white; padding: 20px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.15); margin-bottom: 20px; position: relative; overflow: hidden; animation: weatherExpand 1s ease; }
-        #page-dashboard .weather-widget::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3)); opacity: 0.4; pointer-events: none; }
-        #page-dashboard .weather-icon { font-size: 40px; margin-right: 20px; animation: weatherFloat 3s infinite ease-in-out; }
-        #page-dashboard .weather-temp { font-size: 32px; font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); animation: tempBlink 2s infinite; }
-        #page-dashboard .weather-desc { font-size: 16px; opacity: 0.9; animation: descFade 1.5s ease; }
-        #page-dashboard .branch-selector { margin-bottom: 20px; display: flex; align-items: center; position: relative; animation: selectorSlide 1s ease; }
-        #page-dashboard .branch-selector label { margin-right: 12px; font-weight: 600; color: var(--primary); font-family: "Montserrat", sans-serif; }
-        body.dark-mode #page-dashboard .branch-selector label { color: var(--primary-light); }
-        #page-dashboard .branch-selector select { padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 17px; color: var(--dark); background-color: var(--light); cursor: pointer; transition: all 0.4s ease; font-family: "Roboto", sans-serif; appearance: none; background-image: url("data:image/svg+xml;utf8,<svg fill='%234e54c8' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 35px; animation: selectGlow 2s infinite; }
-        #page-dashboard .branch-selector select:hover { border-color: var(--primary-light); box-shadow: 0 0 12px rgba(78, 84, 200, 0.4); transform: scale(1.05); }
-        #page-dashboard .branch-selector select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 12px rgba(78, 84, 200, 0.6); }
-        #page-dashboard .search-bar { margin-bottom: 20px; display: flex; align-items: center; animation: searchExpand 1s ease; }
-        #page-dashboard .search-bar input { padding: 12px; border-radius: 8px 0 0 8px; border: 1px solid #ddd; border-right: none; font-size: 17px; color: var(--dark); width: 100%; transition: all 0.4s ease; font-family: "Roboto", sans-serif; }
-        #page-dashboard .search-bar input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 8px rgba(78, 84, 200, 0.4); }
-        #page-dashboard .search-bar button { padding: 12px 20px; border-radius: 0 8px 8px 0; border: 1px solid #ddd; border-left: none; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; cursor: pointer; transition: all 0.4s ease; animation: buttonGlow 2s infinite; }
-        #page-dashboard .search-bar button:hover { background: linear-gradient(90deg, var(--primary-light), var(--primary)); transform: scale(1.1) rotate(5deg); }
-        #page-dashboard .back-to-top { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, var(--accent), var(--accent-dark)); color: white; padding: 15px 20px; border-radius: 50%; cursor: pointer; display: none; transition: all 0.4s ease; font-size: 20px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: backToTopBounce 2s infinite; }
-        #page-dashboard .back-to-top:hover { background: linear-gradient(45deg, var(--accent-dark), var(--accent)); transform: scale(1.3) rotate(360deg); }
-        #page-dashboard .scroll-progress { position: fixed; top: 0; left: 0; width: 0; height: 5px; background: linear-gradient(90deg, var(--accent), var(--highlight), var(--primary)); z-index: 1000; transition: width 0.3s ease; animation: progressGlow 2s infinite; }
-        #page-dashboard .loading { display: none; text-align: center; padding: 25px; color: var(--primary); font-style: italic; animation: loadingFade 1s ease; }
-        #page-dashboard .loading::after { content: ""; display: inline-block; width: 25px; height: 25px; border: 3px solid var(--primary); border-top: 3px solid transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 12px; vertical-align: middle; }
-        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
-        @media (max-width: 768px) {
-            #page-dashboard .container { margin: 20px; padding: 20px; }
-            #page-dashboard header h1 { font-size: 36px; }
-            #page-dashboard .date-time { flex-direction: column; text-align: center; }
-            #page-dashboard .tabs { flex-direction: column; }
-            #page-dashboard .tab { padding: 15px; }
-            #page-dashboard table { display: block; overflow-x: auto; }
-            #page-dashboard th, td { padding: 12px; font-size: 15px; }
+
+        #page-dashboard .weather-widget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            animation: weatherPulse 4s ease-in-out infinite;
         }
-        @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes zoomInBounce { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 80% { transform: scale(0.95); } 100% { transform: scale(1); } }
-        @keyframes rippleEffect { 0% { transform: scale(1); opacity: 0.15; filter: blur(2px); } 50% { transform: scale(1.05); opacity: 0.3; filter: blur(0px); } 100% { transform: scale(1); opacity: 0.15; filter: blur(2px); } }
-        @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes lightSweep { 0% { left: -100%; } 50% { left: 100%; } 100% { left: 100%; } }
-        @keyframes spinAndScale { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.2); } 100% { transform: rotate(360deg) scale(1); } }
-        @keyframes slideInLeft { 0% { transform: translateX(-100%); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-        @keyframes buttonPulse { 0% { transform: scale(1); box-shadow: 0 0 5px var(--primary); } 50% { transform: scale(1.05); box-shadow: 0 0 15px var(--info); } 100% { transform: scale(1); box-shadow: 0 0 5px var(--primary); } }
-        @keyframes floatIn { 0% { transform: translateY(50px) rotate(-2deg); opacity: 0; } 60% { transform: translateY(-10px) rotate(1deg); opacity: 1; } 100% { transform: translateY(0) rotate(0deg); } }
-        @keyframes expandIn { 0% { transform: scaleX(0); opacity: 0; } 100% { transform: scaleX(1); opacity: 1; } }
-        @keyframes bounceAndRotate { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(180deg); } 100% { transform: translateY(0) rotate(360deg); } }
-        @keyframes tableReveal { 0% { transform: translateY(20px); opacity: 0; clip-path: inset(0 100% 0 0); } 100% { transform: translateY(0); opacity: 1; clip-path: inset(0 0 0 0); } }
-        @keyframes heartbeat { 0% { transform: scale(1); } 20% { transform: scale(1.1); } 40% { transform: scale(1); } 60% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        @keyframes cardPopIn { 0% { transform: scale(0.8) rotate(-5deg); opacity: 0; } 60% { transform: scale(1.05) rotate(2deg); opacity: 1; } 100% { transform: scale(1) rotate(0deg); } }
-        @keyframes titleFadeIn { 0% { transform: translateY(-20px); opacity: 0; letter-spacing: -2px; } 100% { transform: translateY(0); opacity: 1; letter-spacing: 0; } }
-        @keyframes dateSlideIn { 0% { transform: translateX(-30px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-        @keyframes iconWobble { 0% { transform: rotate(0deg); } 15% { transform: rotate(15deg); } 30% { transform: rotate(-15deg); } 45% { transform: rotate(10deg); } 60% { transform: rotate(-10deg); } 100% { transform: rotate(0deg); } }
-        @keyframes textExpand { 0% { transform: scaleY(0); opacity: 0; } 100% { transform: scaleY(1); opacity: 1; } }
-        @keyframes badgeSpinIn { 0% { transform: rotateY(90deg); opacity: 0; } 100% { transform: rotateY(0deg); opacity: 1; } }
-        @keyframes fadeInUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-        @keyframes linkPop { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); } }
-        @keyframes tabContainerReveal { 0% { transform: scaleX(0) scaleY(0); opacity: 0; } 50% { transform: scaleX(1.1) scaleY(0.5); opacity: 0.5; } 100% { transform: scaleX(1) scaleY(1); opacity: 1; } }
-        @keyframes tabSlideUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-        @keyframes tabGlow { 0% { box-shadow: 0 0 0 var(--primary); } 50% { box-shadow: 0 0 15px var(--primary); } 100% { box-shadow: 0 0 0 var(--primary); } }
-        @keyframes iconSwing { 0% { transform: rotate(0deg); } 25% { transform: rotate(15deg); } 50% { transform: rotate(0deg); } 75% { transform: rotate(-15deg); } 100% { transform: rotate(0deg); } }
-        @keyframes contentFadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
-        @keyframes weatherExpand { 0% { transform: scale(0.5); opacity: 0; border-radius: 50%; } 100% { transform: scale(1); opacity: 1; border-radius: 12px; } }
-        @keyframes weatherFloat { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
-        @keyframes tempBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
-        @keyframes descFade { 0% { opacity: 0; transform: translateX(20px); } 100% { opacity: 0.9; transform: translateX(0); } }
-        @keyframes selectorSlide { 0% { transform: translateX(-50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-        @keyframes selectGlow { 0% { box-shadow: 0 0 5px rgba(78, 84, 200, 0.2); } 50% { box-shadow: 0 0 15px rgba(78, 84, 200, 0.5); } 100% { box-shadow: 0 0 5px rgba(78, 84, 200, 0.2); } }
-        @keyframes searchExpand { 0% { width: 0; opacity: 0; } 100% { width: 100%; opacity: 1; } }
-        @keyframes buttonGlow { 0% { box-shadow: 0 0 5px var(--primary); } 50% { box-shadow: 0 0 15px var(--primary-light); } 100% { box-shadow: 0 0 5px var(--primary); } }
-        @keyframes backToTopBounce { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
-        @keyframes progressGlow { 0% { box-shadow: 0 0 5px var(--accent); } 50% { box-shadow: 0 0 15px var(--highlight); } 100% { box-shadow: 0 0 5px var(--accent); } }
-        @keyframes loadingFade { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        /* --- Demo Notice Styles --- */
+
+        #page-dashboard .weather-icon {
+            font-size: 3rem;
+            animation: weatherBob 3s ease-in-out infinite;
+        }
+
+        #page-dashboard .weather-temp {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Tab System */
+        #page-dashboard .tab-container {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            animation: tabSlideIn 0.6s ease-out;
+        }
+
+        body.dark-mode #page-dashboard .tab-container {
+            background: var(--gray-800);
+        }
+
+        #page-dashboard .tabs {
+            display: flex;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        body.dark-mode #page-dashboard .tabs {
+            background: var(--gray-700);
+            border-bottom: 1px solid var(--gray-600);
+        }
+
+        #page-dashboard .tab {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #page-dashboard .tab:hover:not(.active) {
+            background: var(--gray-100);
+            color: var(--gray-800);
+        }
+
+        body.dark-mode #page-dashboard .tab:hover:not(.active) {
+            background: var(--gray-600);
+            color: var(--gray-100);
+        }
+
+        #page-dashboard .tab.active {
+            color: var(--primary);
+            background: var(--white);
+            position: relative;
+        }
+
+        #page-dashboard .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            animation: tabIndicator 0.3s ease-out;
+        }
+
+        body.dark-mode #page-dashboard .tab.active {
+            background: var(--gray-800);
+            color: var(--primary-light);
+        }
+
+        #page-dashboard .tab-icon {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        #page-dashboard .tab-content {
+            display: none;
+            padding: 2rem;
+            animation: contentFadeSlide 0.4s ease-out;
+        }
+
+        #page-dashboard .tab-content.active {
+            display: block;
+        }
+
+        /* Timetable */
+        #page-dashboard .branch-selector {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #page-dashboard .branch-selector label {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        body.dark-mode #page-dashboard .branch-selector label {
+            color: var(--gray-300);
+        }
+
+        #page-dashboard .branch-selector select {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--gray-300);
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--gray-800);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 250px;
+        }
+
+        #page-dashboard .branch-selector select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        body.dark-mode #page-dashboard .branch-selector select {
+            background: var(--gray-700);
+            border-color: var(--gray-600);
+            color: var(--gray-100);
+        }
+
+        #page-dashboard table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            animation: tableSlideUp 0.6s ease-out;
+        }
+
+        #page-dashboard th, #page-dashboard td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        #page-dashboard th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        #page-dashboard td {
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--white);
+        }
+
+        body.dark-mode #page-dashboard td {
+            border-bottom: 1px solid var(--gray-600);
+            background: var(--gray-800);
+            color: var(--gray-200);
+        }
+
+        #page-dashboard tr:hover td {
+            background: var(--gray-50);
+        }
+
+        body.dark-mode #page-dashboard tr:hover td {
+            background: var(--gray-700);
+        }
+
+        #page-dashboard .lunch-break {
+            text-align: center;
+            background: linear-gradient(135deg, var(--warning) 0%, #f59e0b 100%) !important;
+            color: white !important;
+            font-weight: 600;
+        }
+
+        /* Events and Announcements */
+        #page-dashboard .search-bar {
+            margin-bottom: 2rem;
+            display: flex;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        #page-dashboard .search-bar input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--gray-800);
+        }
+
+        #page-dashboard .search-bar input:focus {
+            outline: none;
+        }
+
+        body.dark-mode #page-dashboard .search-bar input {
+            background: var(--gray-700);
+            color: var(--gray-100);
+        }
+
+        #page-dashboard .search-bar button {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #page-dashboard .search-bar button:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        }
+
+        #page-dashboard .event-item, #page-dashboard .announcement-item {
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 1rem;
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--gray-300);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: cardFadeUp 0.6s ease-out;
+        }
+
+        #page-dashboard .event-item:hover, #page-dashboard .announcement-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-left-color: var(--primary);
+        }
+
+        body.dark-mode #page-dashboard .event-item, 
+        body.dark-mode #page-dashboard .announcement-item {
+            background: var(--gray-800);
+        }
+
+        #page-dashboard .event-title, #page-dashboard .announcement-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+        }
+
+        body.dark-mode #page-dashboard .event-title, 
+        body.dark-mode #page-dashboard .announcement-title {
+            color: var(--gray-100);
+        }
+
+        #page-dashboard .event-date, #page-dashboard .announcement-date {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        body.dark-mode #page-dashboard .event-date, 
+        body.dark-mode #page-dashboard .announcement-date {
+            color: var(--gray-400);
+        }
+
+        #page-dashboard .date-icon, #page-dashboard .title-icon {
+            margin-right: 0.75rem;
+            color: var(--primary);
+        }
+
+        #page-dashboard .event-description, #page-dashboard .announcement-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--gray-600);
+        }
+
+        body.dark-mode #page-dashboard .event-description, 
+        body.dark-mode #page-dashboard .announcement-description {
+            color: var(--gray-300);
+        }
+
+        #page-dashboard .important {
+            border-left-color: var(--danger);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%);
+        }
+
+        body.dark-mode #page-dashboard .important {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%);
+        }
+
+        /* Badges */
+        #page-dashboard .badge {
+            display: inline-block;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 1rem;
+            margin-right: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: badgePulse 0.6s ease-out;
+        }
+
+        #page-dashboard .badge-important {
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+            color: white;
+        }
+
+        #page-dashboard .badge-academic {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        #page-dashboard .badge-cultural {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        #page-dashboard .badge-sports {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+        }
+
+        #page-dashboard .badge-deadline {
+            background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
+            color: white;
+        }
+
+        /* Footer */
+        #page-dashboard footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+            margin-top: 2rem;
+            color: var(--gray-600);
+        }
+
+        body.dark-mode #page-dashboard footer {
+            background: var(--gray-800);
+            color: var(--gray-400);
+        }
+
+        #page-dashboard .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        #page-dashboard .quick-link {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        #page-dashboard .quick-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        #page-dashboard .quick-link:hover::after {
+            width: 100%;
+        }
+
+        #page-dashboard .quick-link:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Loading States */
+        #page-dashboard .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-500);
+            font-style: italic;
+        }
+
+        #page-dashboard .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-300);
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 0.75rem;
+            vertical-align: middle;
+        }
+
+        /* Scroll Progress Bar */
+        #page-dashboard .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* Back to Top Button */
+        #page-dashboard .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.25rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        #page-dashboard .back-to-top:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        /* Demo Notice */
         .demo-notice {
-            margin-top: 15px; font-size: 12px; color: #777; text-align: center;
-            position: relative; z-index: 10;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            position: relative;
         }
-        body.dark-mode #page-dashboard .demo-notice { color: #bbb; }
+
+        body.dark-mode #page-dashboard .demo-notice {
+            color: var(--gray-500);
+        }
+
         #page-welcome .demo-notice {
-            position: absolute; bottom: 10px; width: 100%; color: rgba(255,255,255,0.8);
+            position: absolute;
+            bottom: 1rem;
+            width: 100%;
+            z-index: 3;
         }
-        #page-login .demo-notice, #page-student-details .demo-notice { position: static; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #page-welcome h1 {
+                font-size: 2.5rem;
+            }
+
+            #page-welcome .tagline {
+                font-size: 1rem;
+            }
+
+            #page-dashboard .container {
+                padding: 1rem;
+            }
+
+            #page-dashboard header h1 {
+                font-size: 2rem;
+            }
+
+            #page-dashboard .date-time {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            #page-dashboard .tabs {
+                flex-direction: column;
+            }
+
+            #page-dashboard .tab {
+                padding: 1rem;
+                justify-content: flex-start;
+            }
+
+            #page-dashboard table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            #page-dashboard th, #page-dashboard td {
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            #page-dashboard .quick-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes logoEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes slideUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes buttonEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes featuresSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes formSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes logoSpin {
+            0% {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        @keyframes titleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes inputSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes buttonSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes containerFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes headerShimmer {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes weatherPulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes weatherBob {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes tabSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes tabIndicator {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes contentFadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes tableSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cardFadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes badgePulse {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
 
     <div id="page-welcome">
-        <div class="circles" id="circles-welcome"></div>
+        <div class="particles" id="particles-welcome"></div>
         <div class="welcome-content">
             <div class="logo">
                 <svg class="logo-icon" viewBox="0 0 24 24" fill="white">
@@ -296,148 +1258,285 @@
                 </svg>
             </div>
             <h1>Campus Connect</h1>
-            <p class="tagline">Connect, collaborate, and navigate your campus experience with ease</p>
+            <p class="tagline">Connect, collaborate, and navigate your campus experience with seamless digital integration and real-time updates</p>
             <button class="cta-button" onclick="showPage('page-login')">Get Started</button>
             <div class="features">
                 <div class="feature">
-                    <div class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg></div>
-                    <div class="feature-text">Access course materials and resources</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="feature-text">Access course materials and academic resources instantly</div>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
-                    <div class="feature-text">Connect with peers and professors</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="feature-text">Connect with peers and faculty members effortlessly</div>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg></div>
-                    <div class="feature-text">Stay updated with events and schedules</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="feature-text">Stay updated with events, schedules, and announcements</div>
                 </div>
             </div>
         </div>
-        <div class="demo-notice">Note: This is a static web application for demonstration purposes. Backend functionality is simulated.</div>
+        <div class="demo-notice">Experience the future of campus connectivity - Demo Version</div>
     </div>
     
-    <div id="page-login" style="display: none;">
-        <div class="container">
+    <div id="page-login">
+        <div class="form-container">
             <div class="logo">🎓</div>
             <h1>Student Portal</h1>
-            <p>Enter your email to receive an OTP</p>
+            <p>Enter your email to receive a secure access code</p>
             <div id="message-area"></div>
             <form id="otp-form">
                 <div class="input-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <input type="email" id="email" name="email" placeholder="student@university.edu" required>
                 </div>
-                <button type="submit">Send OTP</button>
+                <button type="submit">Send Verification Code</button>
             </form>
-            <div class="support-text">Need assistance? <a href="#">Contact Support</a></div>
-            <div class="demo-notice">Note: This is a static web application for demonstration purposes. Backend functionality is simulated.</div>
+            <div class="demo-notice">Demo Mode: Authentication simulation enabled</div>
         </div>
     </div>
     
-    <div id="page-student-details" style="display: none;">
-        <div class="container">
-            <div class="logo">🎓</div>
-            <h1>Student Portal</h1>
-            <p>Enter your details to proceed</p>
+    <div id="page-student-details">
+        <div class="form-container">
+            <div class="logo">👤</div>
+            <h1>Student Information</h1>
+            <p>Complete your profile to access the dashboard</p>
             <form id="student-details-form">
                 <div class="input-group">
-                    <label for="student-name">Student Name</label>
-                    <input type="text" id="student-name" name="student-name" placeholder="Enter your name" required>
+                    <label for="student-name">Full Name</label>
+                    <input type="text" id="student-name" name="student-name" placeholder="Enter your full name" required>
                 </div>
                 <div class="input-group">
-                    <label for="roll-number">Roll Number</label>
-                    <input type="text" id="roll-number" name="roll-number" placeholder="Enter your roll number" required>
+                    <label for="roll-number">Student ID / Roll Number</label>
+                    <input type="text" id="roll-number" name="roll-number" placeholder="Enter your student ID" required>
                 </div>
-                <button type="submit">Submit Details</button>
+                <button type="submit">Access Dashboard</button>
             </form>
-            <div class="support-text">Need assistance? <a href="#">Contact Support</a></div>
-            <div class="demo-notice">Note: This is a static web application for demonstration purposes. Backend functionality is simulated.</div>
+            <div class="demo-notice">Demo Mode: Profile setup simulation</div>
         </div>
     </div>
     
-    <div id="page-dashboard" style="display: none;">
-        <div id="particles-js"></div>
+    <div id="page-dashboard">
         <div class="scroll-progress" id="scroll-progress"></div>
         <div class="container">
-            <header><h1><i class="fas fa-university header-icon"></i> UNIVERSITY NOTICE BOARD</h1></header>
+            <header>
+                <h1><i class="fas fa-university header-icon"></i>University Digital Hub</h1>
+            </header>
+            
             <div class="date-time">
                 <div class="welcome" id="greeting"></div>
-                <div id="date-time-display"><i class="far fa-calendar-alt"></i> <span id="current-date"></span> | <i class="far fa-clock"></i> <span id="clock"></span></div>
-                <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> Dark Mode</button>
+                <div id="date-time-display">
+                    <i class="far fa-calendar-alt"></i> <span id="current-date"></span> | 
+                    <i class="far fa-clock"></i> <span id="clock"></span>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i> Dark Mode
+                </button>
             </div>
+            
             <div class="weather-widget">
                 <div>
                     <div class="weather-desc">Campus Weather</div>
-                    <div class="weather-temp" id="weather-temp"></div>
-                    <div class="weather-desc" id="weather-desc"></div>
+                    <div class="weather-temp" id="weather-temp">25°C</div>
+                    <div class="weather-desc" id="weather-desc">Partly Cloudy</div>
                 </div>
-                <div class="weather-icon" id="weather-icon"></div>
+                <div class="weather-icon" id="weather-icon">
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
             </div>
+            
             <div class="tab-container">
                 <div class="tabs">
-                    <div class="tab active" onclick="openTab(event, 'timetable')"><i class="fas fa-calendar-alt tab-icon"></i> Timetable</div>
-                    <div class="tab" onclick="openTab(event, 'events')"><i class="fas fa-star tab-icon"></i> Events</div>
-                    <div class="tab" onclick="openTab(event, 'announcements')"><i class="fas fa-bullhorn tab-icon"></i> Announcements</div>
+                    <div class="tab active" onclick="openTab(event, 'timetable')">
+                        <i class="fas fa-calendar-alt tab-icon"></i> 
+                        Timetable
+                    </div>
+                    <div class="tab" onclick="openTab(event, 'events')">
+                        <i class="fas fa-star tab-icon"></i> 
+                        Events
+                    </div>
+                    <div class="tab" onclick="openTab(event, 'announcements')">
+                        <i class="fas fa-bullhorn tab-icon"></i> 
+                        Announcements
+                    </div>
                 </div>
+                
                 <div id="timetable" class="tab-content active">
                     <div class="section-content">
                         <div class="branch-selector">
-                            <label for="branch-select">Select Branch:</label>
+                            <label for="branch-select">Select Academic Program:</label>
                             <select id="branch-select" onchange="updateTimetable()">
-                                <option value="computer-science">Computer Science and Engineering</option>
+                                <option value="computer-science">Computer Science & Engineering</option>
                                 <option value="mechanical-engineering">Mechanical Engineering</option>
                                 <option value="electrical-engineering">Electrical Engineering</option>
-                                <option value="electronics-communication">Electronics and Communication Engineering</option>
+                                <option value="electronics-communication">Electronics & Communication</option>
                             </select>
                         </div>
-                        <div class="loading" id="timetable-loading">Loading timetable...</div>
-                        <table id="timetable-table">
-                            <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+                        <div class="loading" id="timetable-loading">Loading your schedule...</div>
+                        <table id="timetable-table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                </tr>
+                            </thead>
                             <tbody id="timetable-body"></tbody>
                         </table>
                     </div>
                 </div>
+                
                 <div id="events" class="tab-content">
                     <div class="section-content">
-                        <div class="search-bar"><input type="text" id="events-search" placeholder="Search events..." onkeyup="searchItems('events')"><button onclick="searchItems('events')"><i class="fas fa-search"></i></button></div>
+                        <div class="search-bar">
+                            <input type="text" id="events-search" placeholder="Search events..." onkeyup="searchItems('events')">
+                            <button onclick="searchItems('events')">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                         <div id="events-list">
-                            <div class="event-item important"><div class="event-title"><span class="badge badge-important">IMPORTANT</span><i class="fas fa-exclamation-circle title-icon"></i>Final Examination Schedule Released</div><div class="event-date"><i class="far fa-calendar-alt date-icon"></i>May 10, 2025</div><a href="images/111.png" download="TimeTable.png">Click Here to Download </a><div class="event-description">The final examination schedule for 3-1 2025 has been published. All students are required to check their exam dates and venues on the student portal.</div></div>
-                            <div class="event-item" style="border-left-color: var(--info);"><div class="event-title"><span class="badge badge-academic">ACADEMIC</span><i class="fas fa-microscope title-icon"></i>Research Symposium</div><div class="event-date"><i class="far fa-calendar-alt date-icon"></i>May 15-16, 2025</div><a href="images/2222.png">Click Here to See </a><div class="event-description">The Research Encourages creative Efforts in Exploring the UnExplored Horizons to the Manifold, it's and Achievement For the First Year Students !</div></div>
+                            <div class="event-item important">
+                                <div class="event-title">
+                                    <span class="badge badge-important">Important</span>
+                                    <i class="fas fa-exclamation-circle title-icon"></i>
+                                    Final Examination Schedule Released
+                                </div>
+                                <div class="event-date">
+                                    <i class="far fa-calendar-alt date-icon"></i>
+                                    May 10, 2025
+                                </div>
+                                <div class="event-description">
+                                    The final examination schedule for Semester 3-1 2025 has been officially published. All students are required to verify their exam dates, timings, and assigned venues through the student portal immediately.
+                                </div>
+                            </div>
+                            
+                            <div class="event-item">
+                                <div class="event-title">
+                                    <span class="badge badge-academic">Academic</span>
+                                    <i class="fas fa-microscope title-icon"></i>
+                                    Annual Research Symposium 2025
+                                </div>
+                                <div class="event-date">
+                                    <i class="far fa-calendar-alt date-icon"></i>
+                                    May 15-16, 2025
+                                </div>
+                                <div class="event-description">
+                                    Join us for an inspiring two-day research symposium showcasing innovative projects and breakthrough discoveries. This event encourages creative exploration of uncharted academic territories and celebrates outstanding achievements by our research community.
+                                </div>
+                            </div>
+                            
+                            <div class="event-item">
+                                <div class="event-title">
+                                    <span class="badge badge-cultural">Cultural</span>
+                                    <i class="fas fa-music title-icon"></i>
+                                    Spring Cultural Festival
+                                </div>
+                                <div class="event-date">
+                                    <i class="far fa-calendar-alt date-icon"></i>
+                                    May 20-22, 2025
+                                </div>
+                                <div class="event-description">
+                                    Experience three days of vibrant cultural celebrations featuring music, dance, drama, and art exhibitions. Students from all departments will showcase their creative talents in this spectacular festival.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
                 <div id="announcements" class="tab-content">
                     <div class="section-content">
-                        <div class="search-bar"><input type="text" id="announcements-search" placeholder="Search announcements..." onkeyup="searchItems('announcements')"><button onclick="searchItems('announcements')"><i class="fas fa-search"></i></button></div>
+                        <div class="search-bar">
+                            <input type="text" id="announcements-search" placeholder="Search announcements..." onkeyup="searchItems('announcements')">
+                            <button onclick="searchItems('announcements')">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                         <div id="announcements-list">
-                             <div class="announcement-item important"><div class="announcement-title"><span class="badge badge-deadline">DEADLINE</span><i class="fas fa-award title-icon"></i>UNIVERSITY FEE RESCHEDULED</div><div class="announcement-date"><i class="far fa-calendar-alt date-icon"></i>Deadline: May 15, 2025</div><div class="announcement-description">All the Students Must Pay the University Fee Before the Deadline Date !</div></div>
-                             <div class="announcement-item" style="border-left-color: var(--info);"><div class="announcement-title"><i class="fas fa-book title-icon"></i>TECHWING CLASSES RESCHEDULED</div><div class="announcement-date"><i class="far fa-calendar-alt date-icon"></i>Effective: May 8 - May 12, 2025</div><div class="announcement-description">The TechWing Project Reviews for the AWS & JAVA Trainees were Rescheduled to the May 12</div></div>
+                            <div class="announcement-item important">
+                                <div class="announcement-title">
+                                    <span class="badge badge-deadline">Deadline</span>
+                                    <i class="fas fa-exclamation-triangle title-icon"></i>
+                                    University Fee Payment Deadline Extended
+                                </div>
+                                <div class="announcement-date">
+                                    <i class="far fa-calendar-alt date-icon"></i>
+                                    Deadline: May 15, 2025
+                                </div>
+                                <div class="announcement-description">
+                                    Important Notice: The university fee payment deadline has been extended to May 15, 2025. All students must complete their fee payments before the revised deadline to avoid late penalties and academic holds.
+                                </div>
+                            </div>
+                            
+                            <div class="announcement-item">
+                                <div class="announcement-title">
+                                    <i class="fas fa-code title-icon"></i>
+                                    TechWing Training Program Schedule Update
+                                </div>
+                                <div class="announcement-date">
+                                    <i class="far fa-calendar-alt date-icon"></i>
+                                    Effective: May 8-12, 2025
+                                </div>
+                                <div class="announcement-description">
+                                    The TechWing project review sessions for AWS and Java training participants have been rescheduled to May 12, 2025. All enrolled students should check their updated schedules and prepare accordingly for the comprehensive review process.
+                                </div>
+                            </div>
+                            
+                            <div class="announcement-item">
+                                <div class="announcement-title">
+                                    <i class="fas fa-graduation-cap title-icon"></i>
+                                    Career Counseling Sessions Available
+                                </div>
+                                <div class="announcement-date">
+                                    <i class="far fa-calendar-alt date-icon"></i>
+                                    Ongoing - Book Now
+                                </div>
+                                <div class="announcement-description">
+                                    Professional career counseling sessions are now available for all students. Book your one-on-one session with our experienced career advisors to discuss internship opportunities, job placement strategies, and career development plans.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <footer>
-                <div>© 2025 Campus Connect | Last Updated: May 9, 2025</div>
-                <div class="quick-links"><a href="#" class="quick-link">Student Portal</a><a href="#" class="quick-link">Faculty Directory</a><a href="#" class="quick-link">Campus Map</a><a href="#" class="quick-link">Help Desk</a></div>
-                <div class="demo-notice">This is a static demo. All data is hardcoded in JavaScript.</div>
+                <div>© 2025 Campus Connect Digital Hub | Last Updated: <span id="footer-date"></span></div>
+                <div class="quick-links">
+                    <a href="#" class="quick-link">Student Portal</a>
+                    <a href="#" class="quick-link">Faculty Directory</a>
+                    <a href="#" class="quick-link">Campus Resources</a>
+                    <a href="#" class="quick-link">Technical Support</a>
+                </div>
+                <div class="demo-notice">
+                    🚀 Enhanced Demo Experience - All features are simulation-based
+                </div>
             </footer>
         </div>
-        <div class="back-to-top" onclick="scrollToTop()" title="Back to Top">↑</div>
+        
+        <div class="back-to-top" onclick="scrollToTop()" title="Back to Top">
+            <i class="fas fa-arrow-up"></i>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // --- Core Page Navigation Logic ---
+        // --- Enhanced Core Navigation ---
         function showPage(pageId) {
-            document.getElementById('page-welcome').style.display = 'none';
-            document.getElementById('page-login').style.display = 'none';
-            document.getElementById('page-student-details').style.display = 'none';
-            document.getElementById('page-dashboard').style.display = 'none';
+            // Hide all pages
+            ['page-welcome', 'page-login', 'page-student-details', 'page-dashboard'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
 
             const pageToShow = document.getElementById(pageId);
             if (pageId === 'page-dashboard') {
                 pageToShow.style.display = 'block';
-                // Initialize dashboard functions only when it's shown
                 if (!pageToShow.classList.contains('initialized')) {
                     initializeDashboard();
                     pageToShow.classList.add('initialized');
@@ -445,158 +1544,180 @@
             } else {
                 pageToShow.style.display = 'flex';
             }
+
+            // Initialize page-specific animations
+            if (pageId === 'page-welcome') {
+                createFloatingParticles();
+            }
         }
 
-        // --- Welcome Page Animation ---
-        function createWelcomeCircles() {
-            const container = document.getElementById('circles-welcome');
+        // --- Enhanced Welcome Page Animations ---
+        function createFloatingParticles() {
+            const container = document.getElementById('particles-welcome');
             if (container && container.children.length === 0) {
-                for (let i = 0; i < 12; i++) {
-                    const circle = document.createElement('div');
-                    circle.classList.add('circle');
-                    const size = Math.random() * 150 + 50;
-                    circle.style.width = `${size}px`; circle.style.height = `${size}px`;
-                    circle.style.left = `${Math.random() * 100}%`; circle.style.top = `${Math.random() * 100 + 100}%`;
-                    circle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-                    circle.style.animationDelay = `${Math.random() * 5}s`;
-                    container.appendChild(circle);
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${Math.random() * 15}s`;
+                    particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                    container.appendChild(particle);
                 }
             }
         }
 
-        // --- Login Page Simulation Logic ---
+        // --- Enhanced Login Logic ---
         document.getElementById('otp-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const email = document.getElementById('email').value;
             const messageArea = document.getElementById('message-area');
+            
             if (!email || !email.includes('@')) {
-                messageArea.textContent = 'Please enter a valid email address.'; messageArea.style.color = 'red';
+                messageArea.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid email address.';
+                messageArea.style.color = '#ef4444';
                 return;
             }
-            messageArea.textContent = 'Sending OTP...'; messageArea.style.color = 'blue';
+            
+            messageArea.innerHTML = '<i class="fas fa-paper-plane"></i> Sending verification code...';
+            messageArea.style.color = '#06b6d4';
+            
             setTimeout(() => {
-                showPage('page-student-details');
+                messageArea.innerHTML = '<i class="fas fa-check-circle"></i> Verification code sent successfully!';
+                messageArea.style.color = '#10b981';
+                setTimeout(() => showPage('page-student-details'), 1000);
             }, 1500);
         });
 
-        // --- Student Details Page Simulation Logic (NEW!) ---
+        // --- Enhanced Student Details Logic ---
         document.getElementById('student-details-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            const name = document.getElementById('student-name').value;
-            const roll = document.getElementById('roll-number').value;
+            const name = document.getElementById('student-name').value.trim();
+            const roll = document.getElementById('roll-number').value.trim();
 
             if (!name || !roll) {
-                alert('Please fill in all details.');
+                alert('⚠️ Please fill in all required details.');
                 return;
             }
+
+            // Store user data (in real app, this would be sent to server)
+            sessionStorage.setItem('studentName', name);
+            sessionStorage.setItem('rollNumber', roll);
+            
             showPage('page-dashboard');
         });
 
-        // --- Dashboard Initialization and All Functions ---
+        // --- Enhanced Dashboard Initialization ---
         function initializeDashboard() {
-            particlesJS("particles-js", {"particles":{"number":{"value":100,"density":{"enable":true,"value_area":800}},"color":{"value":["#4e54c8","#ff7e5f","#2ecc71","#f1c40f","#3498db"]},"shape":{"type":["circle","triangle","star"]},"opacity":{"value":0.6,"random":true},"size":{"value":4,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#4e54c8","opacity":0.4,"width":1},"move":{"enable":true,"speed":3,"direction":"none","random":true,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4}}},"retina_detect":true});
             updateDateTimeAndGreeting();
             setInterval(updateDateTimeAndGreeting, 1000);
-            updateWeather();
-            setInterval(updateWeather, 900000);
             updateTimetable();
-            if (localStorage.getItem("theme") === "dark") {
+            updateFooterDate();
+            
+            // Load theme preference
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark") {
                 document.body.classList.add("dark-mode");
-                document.querySelector("#page-dashboard .theme-toggle").innerHTML = "<i class=\"fas fa-sun\"></i> Light Mode";
+                document.querySelector("#page-dashboard .theme-toggle").innerHTML = 
+                    '<i class="fas fa-sun"></i> Light Mode';
             }
         }
-        
+
+        // --- Enhanced Timetable Data ---
         const timetables = {
-            "computer-science":[{"time":"9:00 - 10:30","days":["<span class=\"subject-cs\">Computer Science</span>","<span class=\"subject-math\">Mathematics</span>","<span class=\"subject-physics subject-lab\">Physics Lab</span>","<span class=\"subject-cs\">Computer Science</span>","<span class=\"subject-english\">English</span>"]},{"time":"10:45 - 12:15","days":["<span class=\"subject-physics\">Physics</span>","<span class=\"subject-chemistry\">Chemistry</span>","<span class=\"subject-math\">Mathematics</span>","<span class=\"subject-chemistry subject-lab\">Chemistry Lab</span>","<span class=\"subject-physics\">Physics</span>"]},{"time":"12:15 - 13:00","days":["Lunch Break","Lunch Break","Lunch Break","Lunch Break","Lunch Break"],"isLunch":true},{"time":"13:00 - 14:30","days":["<span class=\"subject-english\">English</span>","<span class=\"subject-cs subject-lab\">Computer Lab</span>","<span class=\"subject-chemistry\">Chemistry</span>","<span class=\"subject-math\">Mathematics</span>","<span class=\"subject-cs subject-lab\">Computer Science Lab</span>"]},{"time":"14:45 - 16:15","days":["Psychology","Physical Education","Economics","History","Career Counseling"]}],
-            "mechanical-engineering":[{"time":"9:00 - 10:30","days":["Thermodynamics","<span class=\"subject-math\">Mathematics</span>","Mechanics Lab","Fluid Mechanics","<span class=\"subject-english\">English</span>"]},{"time":"10:45 - 12:15","days":["Material Science","Engineering Drawing","<span class=\"subject-math\">Mathematics</span>","Machine Design","Thermodynamics"]},{"time":"12:15 - 13:00","days":["Lunch Break","Lunch Break","Lunch Break","Lunch Break","Lunch Break"],"isLunch":true},{"time":"13:00 - 14:30","days":["<span class=\"subject-english\">English</span>","Workshop Practice","Material Science","<span class=\"subject-math\">Mathematics</span>","Fluid Mechanics"]},{"time":"14:45 - 16:15","days":["Industrial Management","Physical Education","Economics","History","Career Counseling"]}],
-            "electrical-engineering":[{"time":"9:00 - 10:30","days":["Circuit Theory","<span class=\"subject-math\">Mathematics</span>","Electronics Lab","Electromagnetics","<span class=\"subject-english\">English</span>"]},{"time":"10:45 - 12:15","days":["Power Systems","Signals and Systems","<span class=\"subject-math\">Mathematics</span>","Control Systems","Circuit Theory"]},{"time":"12:15 - 13:00","days":["Lunch Break","Lunch Break","Lunch Break","Lunch Break","Lunch Break"],"isLunch":true},{"time":"13:00 - 14:30","days":["<span class=\"subject-english\">English</span>","Electrical Machines","Power Systems","<span class=\"subject-math\">Mathematics</span>","Electronics Lab"]},{"time":"14:45 - 16:15","days":["Renewable Energy","Physical Education","Economics","History","Career Counseling"]}],
-            "electronics-communication":[{"time":"9:00 - 10:30","days":["Digital Electronics","<span class=\"subject-math\">Mathematics</span>","Communication Systems Lab <span class=\"subject-lab\"></span>","Signal Processing","<span class=\"subject-english\">English</span>"]},{"time":"10:45 - 12:15","days":["Analog Circuits","Microprocessors","<span class=\"subject-math\">Mathematics</span>","Antenna Design","Digital Electronics"]},{"time":"12:15 - 13:00","days":["Lunch Break","Lunch Break","Lunch Break","Lunch Break","Lunch Break"],"isLunch":true},{"time":"13:00 - 14:30","days":["<span class=\"subject-english\">English</span>","Embedded Systems Lab <span class=\"subject-lab\"></span>","Communication Systems","<span class=\"subject-math\">Mathematics</span>","Signal Processing"]},{"time":"14:45 - 16:15","days":["VLSI Design","Physical Education","Economics","History","Career Counseling"]}]
-        };
-
-        function updateTimetable() {
-            const branch = document.getElementById("branch-select").value;
-            const timetableBody = document.getElementById("timetable-body");
-            const loading = document.getElementById("timetable-loading");
-            const table = document.getElementById("timetable-table");
-            table.style.display = "none"; loading.style.display = "block";
-            setTimeout(() => {
-                timetableBody.innerHTML = "";
-                timetables[branch].forEach(slot => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `<td>${slot.time}</td>`;
-                    if (slot.isLunch) {
-                        row.innerHTML += `<td colspan="5" class="lunch-break"><i class="fas fa-utensils"></i> ${slot.days[0]}</td>`;
-                    } else {
-                        slot.days.forEach(day => { row.innerHTML += `<td>${day}</td>`; });
-                    }
-                    timetableBody.appendChild(row);
-                });
-                loading.style.display = "none"; table.style.display = "table";
-            }, 500);
-        }
-
-        function updateDateTimeAndGreeting() {
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById("current-date").textContent = dateStr;
-            document.getElementById("clock").textContent = now.toLocaleTimeString('en-US');
-            const hours = now.getHours();
-            const greetingElement = document.getElementById("greeting");
-            if (hours < 12) { greetingElement.innerHTML = `<i class="fas fa-hand-wave"></i> Good Morning, Students!`; }
-            else if (hours < 17) { greetingElement.innerHTML = `<i class="fas fa-hand-wave"></i> Good Afternoon, Students!`; }
-            else { greetingElement.innerHTML = `<i class="fas fa-hand-wave"></i> Good Evening, Students!`; }
-        }
-
-        async function updateWeather() {
-            try {
-                // Using a mock response to ensure it always works for the demo
-                const data = {"main":{"temp":39},"weather":[{"description":"partly cloudy","icon":"02d"}]};
-                const temp = `${Math.round(data.main.temp)}°C`;
-                const desc = data.weather[0].description.replace(/\b\w/g, l => l.toUpperCase());
-                const iconClass = {"01d":"fas fa-sun","01n":"fas fa-moon","02d":"fas fa-cloud-sun","02n":"fas fa-cloud-moon","03d":"fas fa-cloud","03n":"fas fa-cloud","04d":"fas fa-cloud","04n":"fas fa-cloud","09d":"fas fa-cloud-showers-heavy","09n":"fas fa-cloud-showers-heavy","10d":"fas fa-cloud-rain","10n":"fas fa-cloud-rain","11d":"fas fa-bolt","11n":"fas fa-bolt","13d":"fas fa-snowflake","13n":"fas fa-snowflake","50d":"fas fa-smog","50n":"fas fa-smog"}[data.weather[0].icon] || "fas fa-cloud-sun";
-                document.getElementById("weather-temp").textContent = temp;
-                document.getElementById("weather-desc").textContent = desc;
-                document.getElementById("weather-icon").innerHTML = `<i class="${iconClass}"></i>`;
-            } catch (error) { console.error("Could not update weather."); }
-        }
-
-        function openTab(evt, tabName) {
-            document.querySelectorAll("#page-dashboard .tab-content").forEach(tc => tc.classList.remove('active'));
-            document.querySelectorAll("#page-dashboard .tab").forEach(t => t.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
-        }
-
-        function searchItems(section) {
-            const input = document.getElementById(`${section}-search`).value.toLowerCase();
-            const items = document.querySelectorAll(`#${section}-list .${section}-item`);
-            items.forEach(item => {
-                item.style.display = item.textContent.toLowerCase().includes(input) ? "" : "none";
-            });
-        }
-
-        function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
-            const isDark = document.body.classList.contains("dark-mode");
-            localStorage.setItem("theme", isDark ? "dark" : "light");
-            document.querySelector("#page-dashboard .theme-toggle").innerHTML = isDark ? "<i class=\"fas fa-sun\"></i> Light Mode" : "<i class=\"fas fa-moon\"></i> Dark Mode";
-        }
-        
-        const backToTopBtn = document.querySelector("#page-dashboard .back-to-top");
-        const scrollProgress = document.getElementById("scroll-progress");
-        window.addEventListener("scroll", () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            scrollProgress.style.width = `${(scrollTop / docHeight) * 100}%`;
-            backToTopBtn.style.display = scrollTop > 300 ? "block" : "none";
-        });
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
-
-        // --- Initial Page Setup ---
-        document.addEventListener('DOMContentLoaded', () => {
-            createWelcomeCircles();
-        });
-    </script>
-
-</body>
-</html>
+            "computer-science": [
+                {
+                    "time": "9:00 - 10:30",
+                    "days": [
+                        "Data Structures & Algorithms",
+                        "Discrete Mathematics",
+                        "Computer Networks Lab",
+                        "Database Management Systems",
+                        "Software Engineering"
+                    ]
+                },
+                {
+                    "time": "10:45 - 12:15",
+                    "days": [
+                        "Operating Systems",
+                        "Computer Architecture",
+                        "Web Development",
+                        "Machine Learning Lab",
+                        "Computer Graphics"
+                    ]
+                },
+                {
+                    "time": "12:15 - 13:00",
+                    "days": ["Lunch Break", "Lunch Break", "Lunch Break", "Lunch Break", "Lunch Break"],
+                    "isLunch": true
+                },
+                {
+                    "time": "13:00 - 14:30",
+                    "days": [
+                        "Theory of Computation",
+                        "Programming Lab",
+                        "Artificial Intelligence",
+                        "Advanced Mathematics",
+                        "Project Work"
+                    ]
+                },
+                {
+                    "time": "14:45 - 16:15",
+                    "days": [
+                        "Technical Communication",
+                        "Industry Mentorship",
+                        "Research Methodology",
+                        "Professional Ethics",
+                        "Innovation Lab"
+                    ]
+                }
+            ],
+            "mechanical-engineering": [
+                {
+                    "time": "9:00 - 10:30",
+                    "days": [
+                        "Thermodynamics",
+                        "Engineering Mathematics",
+                        "Manufacturing Lab",
+                        "Fluid Mechanics",
+                        "Heat Transfer"
+                    ]
+                },
+                {
+                    "time": "10:45 - 12:15",
+                    "days": [
+                        "Materials Science",
+                        "Engineering Drawing",
+                        "Strength of Materials",
+                        "Machine Design",
+                        "Industrial Engineering"
+                    ]
+                },
+                {
+                    "time": "12:15 - 13:00",
+                    "days": ["Lunch Break", "Lunch Break", "Lunch Break", "Lunch Break", "Lunch Break"],
+                    "isLunch": true
+                },
+                {
+                    "time": "13:00 - 14:30",
+                    "days": [
+                        "Mechanical Vibrations",
+                        "Workshop Practice",
+                        "Automotive Engineering",
+                        "Control Systems",
+                        "CAD/CAM Lab"
+                    ]
+                },
+                {
+                    "time": "14:45 - 16:15",
+                    "days": [
+                        "Industrial Management",
+                        "Safety Engineering",
+                        "Quality Control",
+                        "Project Management",
+                        "Seminar"
+                    ]
+                }
+            ],
+            "electrical-engineering": [
+                {
+                    "time": "9:00 - 10:
